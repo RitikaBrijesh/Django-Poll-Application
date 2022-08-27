@@ -1,0 +1,50 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+    
+    <style>
+        body{
+            text-align:center;
+        }
+    </style>
+    <h2>This is Vote page</h2>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>{{ poll.question }}</h2>
+            </div>
+        </div>
+    
+        <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+        <div class="radio">
+            <label>
+                <input type="radio" name="poll" value="option1">
+                {{ poll.first }}
+            </label> &nbsp;
+            
+            <label>
+                <input type="radio" name="poll" value="option2">
+                {{ poll.second }}
+            </label> &nbsp;
+            <br>
+            <label>
+                <input type="radio" name="poll" value="option3">
+                {{ poll.third }}
+            </label> &nbsp;
+           
+
+            <label>
+                <input type="radio" name="poll" value="option3">
+                {{ poll.fourth }}
+            </label> &nbsp;
+        </div>
+
+        <button type="submit" class="btn btn-info">Submit</button>
+        </form>
+    </div>
+
+{% endblock content %}
+    

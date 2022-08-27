@@ -1,0 +1,42 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+    <style>
+        form{
+            width:450px;
+            height:500px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            text-align:center;
+            margin-left:550px;
+        }
+    </style>
+    <h2>This is create page</h2>
+
+        <form method='POST'>
+            {% csrf_token %}
+            <div class='panel-body'> 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <br><br>
+                            <p>{{form.username}}</p>
+                            {{ form.question }}
+                    </div>
+                </div>
+                    <br>
+                    {{ form.first }}
+                <br>
+                    {{ form.second }}
+                <br>
+                    {{ form.third }}
+                <br>
+                    {{ form.fourth }}
+                <br>
+            </div>
+            
+            
+            <button class='btn btn-primary' type='submit' style="width:250px;margin-left:40px;">Create</button>
+        </form>
+        
+
+{% endblock content %}
+    

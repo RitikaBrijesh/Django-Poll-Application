@@ -1,0 +1,69 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+    
+    <style>
+        {% comment %} body{
+            text-align:center;
+        }{% endcomment %}
+
+        .form-control{
+            max-width:300px;
+            margin-left:50px;
+        } 
+
+        strong{
+            margin-left:50px;
+        }
+
+        .pull-right{
+            margin-left:100px;
+        }
+    </style>
+    <h2>This is Polls page</h2>
+
+    {% comment %} <div class="card-columns">
+    {% for poll in polls %}
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <strong>{{ poll.question }}</strong>
+                <br>
+                <span class="form-control">{{poll.first}} | {{poll.option_one_count}}</span><br>
+                <span class="form-control">{{poll.second}} | {{poll.option_two_count}}</span><br>
+                <span class="form-control">{{poll.third}} | {{poll.option_three_count}}</span><br>
+                <span class="form-control">{{poll.fourth}} | {{poll.option_fourth_count}}</span><br>
+
+                <span class="pull-right">
+                    <button class='btn btn-primary'>Total : {{poll.total}}</button>
+                    <a href="{% url 'Vote' poll.id %}" class="btn btn-primary btn-xs">Vote</a> &nbsp;
+            
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+{% endfor %} {% endcomment %}
+
+<div class="row">
+    {% for poll in polls %}
+        <div class="col-md-4">
+            <p><strong><u>{{poll.username|default:'Guest'}}</u></strong></p>
+            <strong>{{ poll.question }}</strong>
+                <br>
+                <span class="form-control">{{poll.first}} | {{poll.option_one_count}}</span><br>
+                <span class="form-control">{{poll.second}} | {{poll.option_two_count}}</span><br>
+                <span class="form-control">{{poll.third}} | {{poll.option_three_count}}</span><br>
+                <span class="form-control">{{poll.fourth}} | {{poll.option_four_count}}</span><br>
+
+                <span class="pull-right">
+                    <button class='btn btn-primary'>Total : {{poll.total}}</button>
+                    <a href="{% url 'Vote' poll.id %}" class="btn btn-primary btn-xs">Vote</a> &nbsp;
+                    {% comment %} <a href="{% url 'results' %}" class="btn btn-default btn-xs">View Results</a> &nbsp; {% endcomment %}
+                </span>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+    
