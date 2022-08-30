@@ -24,39 +24,19 @@ class API_object_details(generics.RetrieveUpdateDestroyAPIView):
 def home(request):
     return render(request, 'users/home.html')
 
-
-class RegisterView(View):
-    form_class = RegisterForm
-    initial = {'key': 'value'}
-    template_name = 'users/register.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        # will redirect to the home page if a user tries to access the register page while logged in
-        if request.user.is_authenticated:
-            return redirect(to='/')
-
-        # else process dispatch as it otherwise normally would
-        return super(RegisterView, self).dispatch(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
+            messages.success(request, f'Your account has been created for {username} You are now able to log in')
+            return redirect('login')
+    else:
+        form = RegisterForm()
+    return render(request, 'users/register.html', {'form': form})
 
-            return redirect(to='login')
 
-        return render(request, self.template_name, {'form': form})
-
-
-# Class based view that extends from the built in login view to add a remember me functionality
 class CustomLoginView(LoginView):
     form_class = LoginForm
 
